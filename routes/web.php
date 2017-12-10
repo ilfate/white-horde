@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'GameController@index')->name('game');
+Route::get('/name-your-tribe', 'GameController@index')->name('nameYourTribe');
 
 Auth::routes();
 
