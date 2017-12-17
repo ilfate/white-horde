@@ -24,33 +24,21 @@ class GameController extends Controller
      */
     public function index(Request $request)
     {
-        $tribe = $this->getOrCreateTribe($request);
+        $tribe = Tribe::getOrCreateTribe($request);
 //        return view('game')->with(['tribe' => 'awd']);
         return view('game')->with(['tribe' => $tribe->export()]);
     }
 
-    /**
-     * @param Request $request
-     * @return Tribe
-     */
-    protected function getOrCreateTribe(Request $request)
+    public function test()
     {
-        if ($user = $request->user()) {
-            $tribe = Tribe::getUserTribe($user);
-        } else {
-            $sessionId = $request->session()->getId();
-            $tribeId = $request->session()->get('tribe_id');
-            $tribe = Tribe::getSessionTribe($tribeId, $sessionId);
-        }
-        if (!$tribe) {
-            // tribe is missing.
-            // user needs to create a tribe
-            $sessionId = $request->session()->getId();
-            $tribe = new Tribe();
-            $tribe->session_key = $sessionId;
-            return $tribe;
-            // ok user is logged
-        }
-        return $tribe;
+        $text = '';
+
+        $generator = \Nubs\RandomNameGenerator\All::create();
+
+        echo $generator->getName();
+
+        return $text;
     }
+
+
 }

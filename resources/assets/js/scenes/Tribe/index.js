@@ -9,23 +9,23 @@ class Tribe extends React.Component
 {
     constructor(props) {
         super(props);
-        const {dispatch} = props;
+        const { dispatch } = props;
         this.boundActionCreators = bindActionCreators({usePreloadedTribe}, dispatch);
 
         this.state = {
         };
     }
 
-    componentDidMount() {
-        if (this.props.state.tribe.id === null) {
-            const {dispatch} = this.props;
-            let action = usePreloadedTribe();
-            dispatch(action);
-        }
-    }
+    // componentWillMount() {
+    //     if (this.props.state.tribe.id === null) {
+    //         const { dispatch } = this.props;
+    //         let action = usePreloadedTribe();
+    //         dispatch(action);
+    //     }
+    // }
 
     redirectToNameYourTribe() {
-        return <Redirect push to={ '/' + Routes.NAME_TRIBE  }/>;
+        return <Redirect push to={ '/' + Routes.NAME_TRIBE }/>;
     }
 
     render()
@@ -45,5 +45,5 @@ class Tribe extends React.Component
 }
 
 export default connect(
-    state => ({state: state.tribeReducer})
+    state => ({state: state})
 )(Tribe);

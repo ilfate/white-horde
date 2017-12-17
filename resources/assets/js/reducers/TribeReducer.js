@@ -2,31 +2,24 @@ import { combineReducers } from 'redux';
 
 // import { reducer as dataReducer } from './data/reducer';
 
+export const SAVE_TRIBE = 'Tribe/SAVE_TRIBE';
 export const UPDATE_TRIBE = 'Tribe/UPDATE_TRIBE';
 
-const initialState = {
-    name: null,
-    data: null,
-    id: null,
-    year: null
-};
+const initialState = BACKEND_TRIBE;
 
-const tribe = (state = initialState, action) => {
+export const TribeReducer = (state = initialState, action) => {
     console.log('Reducer action:', action);
     switch (action.type) {
-        case UPDATE_TRIBE:
-
+        case SAVE_TRIBE:
             return Object.assign({}, state, {
                 name: action.data.name,
                 data:action.data.data,
                 id: action.data.id,
                 year: action.data.year
             });
+        case UPDATE_TRIBE:
+            return Object.assign({}, state, action.data);
+
     }
     return state;
 };
-
-export const TribeReducer = combineReducers({
-    // data:        dataReducer,
-    tribe,
-});

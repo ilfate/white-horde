@@ -14,6 +14,10 @@
 Route::get('/', 'GameController@index')->name('game');
 Route::get('/name-your-tribe', 'GameController@index')->name('nameYourTribe');
 
+
+
+Route::get('test', 'GameController@test');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

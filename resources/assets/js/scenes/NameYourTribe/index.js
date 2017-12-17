@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Form from './components/Form';
+import { Routes } from 'router';
+import { Redirect } from 'react-router';
 
-export default class NameYourTribe extends React.Component
+class NameYourTribe extends React.Component
 {
     constructor(props) {
         super(props);
@@ -10,15 +14,24 @@ export default class NameYourTribe extends React.Component
 
     }
 
+    redirectToTribePage() {
+        return <Redirect push to={ '/' + Routes.TRIBE }/>;
+    }
+
     render()
     {
+        if (this.props.state.tribe.name !== null) {
+            return this.redirectToTribePage();
+        }
         return (
             <div>
-                <h1>Name your tribe</h1>
-                <input type="text"/>
-                <a className="btn btn-default">>></a>
+                <Form />
             </div>
         );
 
     }
 }
+
+export default connect(
+    state => ({state: state})
+)(NameYourTribe);

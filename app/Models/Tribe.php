@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 /**
  * Class Tribe
@@ -36,6 +37,32 @@ class Tribe extends Model
     protected $appends = array();
 
     protected $guarded = array();
+
+    /**
+     * @param Request $request
+     * @return Tribe
+     */
+    public static function getOrCreateTribe(Request $request)
+    {
+        if ($user = $request->user()) {
+            $tribe = Tribe::getUserTribe($user);
+        } else {
+            $sessionId = $request->session()->getId();
+            $tribeId = $request->session()->get('tribe_id');
+            //dd([$tribeId, $sessionId]);
+            $tribe = Tribe::getSessionTribe($tribeId, $sessionId);
+        }
+        if (!$tribe) {
+            // tribe is missing.
+            // user needs to create a tribe
+            $sessionId = $request->session()->getId();
+            $tribe = new Tribe();
+            $tribe->session_key = $sessionId;
+            return $tribe;
+            // ok user is logged
+        }
+        return $tribe;
+    }
 
     public static function getUserTribe(User $user)
     {
