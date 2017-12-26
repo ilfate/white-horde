@@ -26,6 +26,7 @@ class GameController extends Controller
     {
         $tribe = Tribe::getOrCreateTribe($request);
 //        return view('game')->with(['tribe' => 'awd']);
+        $tribe->withTribeMembers();
         return view('game')->with(['tribe' => $tribe->export()]);
     }
 

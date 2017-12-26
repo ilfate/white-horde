@@ -14,10 +14,7 @@ export function sendTribeName(name, dispatch) {
             if (!response.data.status === 'error') {
                 // dispatch({type: SELL_REQUEST_LOADED, data:response.data.data});
             } else {
-                 dispatch({type: UPDATE_TRIBE, data:{
-                     id:response.data.data.id,
-                     name:response.data.data.name,
-                 }});
+                 dispatch({type: UPDATE_TRIBE, data:response.data.data});
             }
 
         })

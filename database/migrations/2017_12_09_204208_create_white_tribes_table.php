@@ -20,6 +20,7 @@ class CreateWhiteTribesTable extends Migration
             $table->string('name', 40)->nullable();
             $table->integer('year')->default(0)->unsigned();
             $table->text('data')->nullable();
+            $table->string('state', 20)->default('creation');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

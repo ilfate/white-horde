@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,25 @@ use Illuminate\Http\Request;
  * int    user_id
  * string session_key
  * string name
+ * string state
  * int    year
  * text   data
  * bool   is_active
+ *
+ * @property mixed id
+ * @property mixed year
+ * @property mixed name
+ * @property mixed data
+ * @property mixed state
  *
  * @package App\Models
  */
 class Tribe extends Model
 {
+    const STATE_CREATION        = 'creation';
+    const STATE_CREATION_BATTLE = 'battle_c';
+    const STATE_BATTLE          = 'battle';
+    const STATE_SETTLE          = 'settle';
 	/**
 	 * The database table used by the model.
 	 *
@@ -37,6 +49,11 @@ class Tribe extends Model
     protected $appends = array();
 
     protected $guarded = array();
+
+    /**
+     * @var Collection
+     */
+    protected $tribeMembers;
 
     /**
      * @param Request $request
@@ -81,14 +98,28 @@ class Tribe extends Model
             ->first();
     }
 
+    public function withTribeMembers()
+    {
+        $this->tribeMembers = Tribesman::where('tribe_id', '=', $this->id)
+            ->where('is_alive', '=', true)->get();
+    }
+
     public function export()
     {
-        return json_encode([
+        $data = [
             'id'   => $this->id,
             'year' => $this->year,
             'name' => $this->name,
             'data' => $this->data,
-        ]);
+        ];
+        if ($this->tribeMembers) {
+            $data['tribesmen'] = [];
+            foreach ($this->tribeMembers as $tribeMember) {
+                $data['tribesmen'][] = $tribeMember->exportAsArray();
+            }
+
+        }
+        return json_encode($data);
     }
 
 }

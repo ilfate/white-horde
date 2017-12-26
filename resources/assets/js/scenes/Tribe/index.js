@@ -14,6 +14,8 @@ class Tribe extends React.Component
 
         this.state = {
         };
+        console.log('Tribe state on page load:');
+        console.log(props.state.tribe);
     }
 
     // componentWillMount() {
@@ -33,6 +35,7 @@ class Tribe extends React.Component
         if (this.props.state.tribe.name === null) {
             return this.redirectToNameYourTribe();
         }
+
         return (
             <div>
                 <h1>Tribe page</h1>

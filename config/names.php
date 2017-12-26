@@ -19,19 +19,27 @@ return [
         // I
         // J
         // K
+            'Kosh',
         // L
             'Lardul',
+            'Laravel',
         // M
+            'Mulik',
         // N
+            'Nor',
             'Northenlion',
         // O
         // P
             'Portopul',
         // Q
+            'Qeek',
         // R
             'Romul',
         // S
         // T
+            'Tamtam',
+            'Tinos',
+            'Terrat',
         // U
         // V
         // W
@@ -54,22 +62,34 @@ return [
         // H
             'Holiday',
         // I
+            'Icha',
+            'Ila',
         // J
         // K
             'Kiliana',
+            'Kosh',
         // L
+            'Lilu',
+            'Lora',
+            'Lavanda',
         // M
             'Mo',
         // N
+            'Nora',
         // O
+            'Ousha',
+            'Ohila',
         // P
+            'Pasha',
         // Q
         // R
             'Rama',
         // S
         // T
+            'Terra',
         // U
         // V
+            'Valla',
         // W
         // X
         // Y
