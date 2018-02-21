@@ -14,6 +14,7 @@
 Route::get('/', 'GameController@index')->name('game');
 Route::get('/name-your-tribe', 'GameController@index')->name('nameYourTribe');
 Route::get('/tribe', 'GameController@index');
+Route::get('/combat', 'GameController@index');
 
 
 
